@@ -1,0 +1,69 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 mt-2 mb-5">
+  <h1 class="mt-2 mt-md-4 mb-3 pt-5">Imagenes</h1>
+</div>
+
+<div class="card box-shadow-sm">
+  <div class="card-header">
+    <h5 style="margin-bottom: 0px;">Cargar una nueva imagen</h5>
+</div>
+  <div class="card-body">
+        <div class="row">
+          <div class="form-group">
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Cargar archivo y luego presionar el boton guardar</label>
+              <input class="form-control" type="file" id="formFile" id="formFile" #fileInput (change)="onFileSelected($event)">
+              <button class="btn btn-secondary btn-sm mt-2" (click)="cargarImagen(fileInput)">Cargar</button>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+<br>
+<!-- Lista de imágenes -->
+<div class="card box-shadow-sm">
+  <div class="card-header">
+    <h5 style="margin-bottom: 0px;">Galeria de slides utilizados en la web del sanatorio Las Lomas.</h5>
+</div>
+  <div class="card-body">
+        <div class="row" *ngIf="imagenes">
+          <div class="col-md-4 form-group" *ngFor="let imagen of imagenes">
+               <img [src]="imagen.location" alt="Imagen" width="200" height="200">
+               <button class="btn btn-outline-danger btn-sm mt-2"  (click)="eliminarImagen(imagen.file)">Eliminar</button>
+          </div>
+        </div>
+  </div>
+</div>         
+<!--Texto informativo-->
+<div class="border-bottom pt-5 mt-2 mb-5">
+  <h1 class="mt-2 mt-md-4 mb-3 pt-5">Texto Informativo</h1>
+</div>
+
+ <form #registroForm="ngForm" >
+      <div class="card box-shadow-sm">
+            <div class="card-header">
+                <h5 style="margin-bottom: 0px;">Mantenimiento de texto</h5>
+            </div>
+            <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="validationCustom01" class="form-label">Titulo</label>
+                      <input class="form-control" type="text" placeholder="Ingrese un titulo"  name="titulo"  [(ngModel)]="textInf.titulo">
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label for="validationCustom01" class="form-label">Introducción</label>
+                      <textarea id="introduccionTextarea" class="form-control resizable-textarea" placeholder="Ingrese una introduccion al cuerpo"  name="intorduccion"   [(ngModel)]="textInf.introduccion"></textarea>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label for="validationCustom01" class="form-label">Cuerpo</label>
+                      <textarea id="cuerpoTextarea" class="form-control resizable-textarea"  placeholder="Ingrese el cuerpo del texto"  name="cuerpo"  [(ngModel)]="textInf.cuerpo"></textarea>
+                    </div>
+                  </div>
+                
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary mr-3" id="btn_insertar" [disabled]="isTextInfLoaded" type="submit" (click)="registro(registroForm, 'insertar')">Insertar texto</button>
+              <button class="btn btn-warning mr-3" id="btn_modificar" [disabled]="!isTextInfLoaded" type="submit" (click)="registro(registroForm, 'modificar')">Modificar Texto</button>
+            </div>
+      </div>
+    </form>  
