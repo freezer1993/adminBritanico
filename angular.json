@@ -61,10 +61,12 @@
           "configurations": {
             "production": {
               "browserTarget": "admin:build:production",
+              "host": "192.168.4.59",
               "port": 55001
             },
             "development": {
               "browserTarget": "admin:build:development",
+              "host": "192.168.4.59",
               "port": 55001
             }
           },
